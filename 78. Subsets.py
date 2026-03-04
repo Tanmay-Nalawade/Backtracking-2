@@ -32,6 +32,7 @@ class Solution:
 
 # FOR LOOP BASED RECURSION
 
+# The complexities remain the same as this is just a braoder tree rather that a long one in 0-1 recursion.
 # In for loop based recursion we add the path to the result at every node because the not choose case is implicitly handled by the for loop. The for loop iterates through the nums array starting from the pivot index and explores all the possibilities of choosing each element in the nums array. We don't need to explicitly handle the not choose case because it is already covered by the for loop iterating through the nums array.
 # In the loop we do action -> recurse -> backtrack and always pass i+1 as we don't want to repeat the element again.
 class Solution:
@@ -50,3 +51,22 @@ class Solution:
             self.helper(nums, i + 1, path)
             # backtrack
             path.pop()
+
+
+# Time: O(2^n)
+# Space: O(1)
+
+# To get a exhaustive solution we need to have two loops one that runs on the nums array and another that runs on the result array. 
+# The first loop is to iterate through the nums array and the second loop is to iterate through the result array to get all the existing subsets and add the current element from the nums array to those subsets to create new subsets. 
+# This way we can get all the possible subsets of the nums array.
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = [[]]
+
+        for i in range(len(nums)):
+            for j in range(len(res)):
+                li = list(res[j])
+                li.append(nums[i])
+                res.append(li)
+        return res
